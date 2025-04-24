@@ -153,10 +153,7 @@ class MAVL(nn.Module):
     def _get_basemodel(self, model_name, pretrained=False, layers=['blocks.9']):
         # try:
         ''' visual backbone'''
-        net_dict = {"resnet18": models.resnet18(pretrained=pretrained),
-                        "resnet50": models.resnet50(pretrained=pretrained),
-                        "ViT-B/16": models.vit_b_16(torchvision.models.ViT_B_16_Weights.IMAGENET1K_SWAG_LINEAR_V1),
-                        "ViT-L/16": models.vit_l_16(torchvision.models.ViT_L_16_Weights.IMAGENET1K_SWAG_LINEAR_V1)}
+        net_dict = {"efficientnet-b0": timm.create_model("efficientnet_b0", pretrained=True),}
         if "resnet" in model_name:
             model = net_dict[model_name]
             num_ftrs = int(model.fc.in_features/2)
